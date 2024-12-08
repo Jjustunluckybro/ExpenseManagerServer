@@ -15,16 +15,16 @@ data class AccountDB (
     val id: Long,
 
     @Column(name = "name")
-    val name: String,
+    var name: String,
 
     @Column(name = "description")
-    val descriptor: String?,
+    var descriptor: String?,
 
     @Column(name = "balance")
-    val balance: Float = 0f,
+    var balance: Float = 0f,
 
     @Column(name = "type")
-    val type: AccountType,
+    var type: AccountType,
 
     @ManyToOne
     @JoinColumn(name = "user_id")

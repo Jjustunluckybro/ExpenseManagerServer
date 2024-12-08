@@ -6,8 +6,10 @@ import com.app.manager.models.convertors.AccountModelsConvertor
 import com.app.manager.models.database.AccountDB
 import com.app.manager.models.database.UserDB
 import com.app.manager.models.dto.AccountDTO
+import com.app.manager.models.enums.AccountType
 import com.app.manager.repo.AccountsRepo
 import com.app.manager.repo.UserRepo
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
 @Service
@@ -26,5 +28,26 @@ class AccountService(
 
     fun getAllUserAccounts(userId: Long): List<AccountDTO> {
         return accountModelsConvertor.toDTO(accountsRepo.findAccountsByUserId(userId))
+    }
+
+    @Transactional
+    fun updateAccount(
+        accountId: Long,
+        newName: String?,
+        newType: AccountType?,
+        newBalance: Float?,
+        newDescription: String?
+    ) {
+        val accountDB: AccountDB = accountsRepo.findAccountById(accountId)
+            ?: throw NotFoundException("Account with id $accountId not found")
+        val account = AccountDTO(
+            id = accountId,
+            userID = accountDB.user.id,
+            name = newName ?: accountDB.name,
+            type = newType ?: accountDB.type,
+            balance = newBalance ?: accountDB.balance,
+            descriptor = newDescription ?: accountDB.descriptor,
+        )
+        accountsRepo.updateAccount(account)
     }
 }
