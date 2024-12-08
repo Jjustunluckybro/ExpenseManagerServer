@@ -39,6 +39,26 @@ class CategoryController(
         return categoryService.getAllSubCategoryByCategoryId(categoryId)
     }
 
+    @PatchMapping("/updateCategory")
+    @ResponseStatus(HttpStatus.OK)
+    fun updateCategory(
+        @RequestParam categoryId: Long,
+        @RequestParam newName: String?,
+        @RequestParam newDescription: String?
+    ) {
+        categoryService.updateCategory(categoryId, newName, newDescription)
+    }
+
+    @PatchMapping("/updateSubCategory")
+    @ResponseStatus(HttpStatus.OK)
+    fun updateSubCategory(
+        @RequestParam subCategoryId: Long,
+        @RequestParam newName: String?,
+        @RequestParam newDescription: String?
+    ) {
+        categoryService.updateSubCategory(subCategoryId, newName, newDescription)
+    }
+
     @ExceptionHandler(NotFoundException::class)
     fun handleNotFoundException(e: NotFoundException): ResponseEntity<String> {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
