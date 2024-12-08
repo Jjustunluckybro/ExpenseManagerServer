@@ -38,13 +38,13 @@ class CategoryService(
         ).id
     }
 
-    fun getAllUserCategories(userId: Long): MutableList<CategoryDTO> {
+    fun getAllUserCategories(userId: Long): List<CategoryDTO> {
         return categoryModelsConvertor.categoriesToDTO(
             categoryRepo.findCategoriesByUserId(userId)
         )
     }
 
-    fun getAllSubCategoryByCategoryId(categoryId: Long): MutableList<SubCategoryDTO> {
+    fun getAllSubCategoryByCategoryId(categoryId: Long): List<SubCategoryDTO> {
         return categoryModelsConvertor.subCategoriesToDTO(
             subCategoryRepo.findSubCategoriesByCategoryId(categoryId)
         )

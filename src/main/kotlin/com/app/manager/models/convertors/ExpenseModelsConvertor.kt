@@ -42,11 +42,12 @@ class ExpenseModelsConvertor {
         )
     }
 
-    fun toDTO(expenses: List<ExpenseDB>): MutableList<ExpenseDTO> {
-        val result: MutableList<ExpenseDTO> = mutableListOf()
-        for (expense in expenses) {
-            result.add(toDTO(expense))
+    fun toDTO(expenses: List<ExpenseDB>): List<ExpenseDTO> {
+        return buildList {
+            for (expense in expenses) {
+                val dto = toDTO(expense)
+                add(dto)
+            }
         }
-        return result
     }
 }

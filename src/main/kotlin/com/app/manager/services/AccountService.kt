@@ -24,7 +24,7 @@ class AccountService(
         return accountsRepo.save(accountToSave).id
     }
 
-    fun getAllUserAccounts(userId: Long): MutableList<AccountDTO> {
+    fun getAllUserAccounts(userId: Long): List<AccountDTO> {
         return accountModelsConvertor.toDTO(accountsRepo.findAccountsByUserId(userId))
     }
 }

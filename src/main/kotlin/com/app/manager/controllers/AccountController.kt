@@ -21,7 +21,7 @@ class AccountController (
 
     @GetMapping("/getAllUserAccounts")
     @ResponseStatus(HttpStatus.OK)
-    fun getAllUserAccounts(userId: Long): MutableList<AccountDTO> {
+    fun getAllUserAccounts(userId: Long): List<AccountDTO> {
         return accountService.getAllUserAccounts(userId)
     }
 

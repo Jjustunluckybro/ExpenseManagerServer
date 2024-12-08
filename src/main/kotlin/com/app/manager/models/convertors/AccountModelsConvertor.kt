@@ -30,11 +30,12 @@ class AccountModelsConvertor {
         )
     }
 
-    fun toDTO(accounts: List<AccountDB>): MutableList<AccountDTO> {
-        val result: MutableList<AccountDTO> = mutableListOf()
-        for (account in accounts) {
-            result += toDTO(account)
+    fun toDTO(accounts: List<AccountDB>): List<AccountDTO> {
+        return buildList {
+            for (account in accounts) {
+                val dto = toDTO(account)
+                add(dto)
+            }
         }
-        return result
     }
 }

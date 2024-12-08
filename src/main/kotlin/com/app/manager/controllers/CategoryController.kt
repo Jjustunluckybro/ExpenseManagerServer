@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/v1/userSettings")
-class CategoryController (
+class CategoryController(
     private val categoryService: CategoryService
-){
+) {
     @PostMapping("/createCategory")
     @ResponseStatus(HttpStatus.CREATED)
     fun createCategory(@RequestBody category: CreateCategoryDTO) {
@@ -29,13 +29,13 @@ class CategoryController (
 
     @GetMapping("/getAllUserCategories")
     @ResponseStatus(HttpStatus.OK)
-    fun getAllUserCategories(userId: Long): MutableList<CategoryDTO> {
+    fun getAllUserCategories(userId: Long): List<CategoryDTO> {
         return categoryService.getAllUserCategories(userId)
     }
 
     @GetMapping("/getAllSubCategoriesByParentCategoryID")
     @ResponseStatus(HttpStatus.OK)
-    fun getAllSubCategoriesByParentCategoryID(categoryId: Long): MutableList<SubCategoryDTO> {
+    fun getAllSubCategoriesByParentCategoryID(categoryId: Long): List<SubCategoryDTO> {
         return categoryService.getAllSubCategoryByCategoryId(categoryId)
     }
 

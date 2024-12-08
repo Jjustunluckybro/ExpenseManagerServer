@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class CategoryModelsConvertor {
-    fun fromDTO(category: CreateCategoryDTO, user: UserDB) : CategoryDB {
+    fun fromDTO(category: CreateCategoryDTO, user: UserDB): CategoryDB {
         return CategoryDB(
             id = 0,
             name = category.name,
@@ -38,12 +38,13 @@ class CategoryModelsConvertor {
         )
     }
 
-    fun categoriesToDTO(categories: List<CategoryDB>): MutableList<CategoryDTO> {
-        val result: MutableList<CategoryDTO> = mutableListOf()
-        for (category in categories) {
-            result.add(categoriesToDTO(category))
+    fun categoriesToDTO(categories: List<CategoryDB>): List<CategoryDTO> {
+        return buildList {
+            for (category in categories) {
+                val dto = categoriesToDTO(category)
+                add(dto)
+            }
         }
-        return result
     }
 
     fun subCategoriesToDTO(subCategory: SubCategoryDB): SubCategoryDTO {
@@ -55,11 +56,12 @@ class CategoryModelsConvertor {
         )
     }
 
-    fun subCategoriesToDTO(subCategories: List<SubCategoryDB>): MutableList<SubCategoryDTO> {
-        val result: MutableList<SubCategoryDTO> = mutableListOf()
-        for (subCategory in subCategories) {
-            result.add(subCategoriesToDTO(subCategory))
+    fun subCategoriesToDTO(subCategories: List<SubCategoryDB>): List<SubCategoryDTO> {
+        return buildList {
+            for (subCategory in subCategories) {
+                val dto = subCategoriesToDTO(subCategory)
+                add(dto)
+            }
         }
-        return result
     }
 }
